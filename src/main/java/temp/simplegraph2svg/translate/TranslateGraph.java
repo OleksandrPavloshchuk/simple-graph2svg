@@ -35,8 +35,12 @@ public record TranslateGraph(
 
         final Graph graph = new TranslateXml2GraphJavaObject().apply(src);
 
-        // TODO remove trace
-        System.out.println("Graph: " + graph);
+        // TODO pass start node id here
+        final String rootNodeId = "r";
+
+        final DistributeNodes distributeNodes = new DistributeNodes(graph, rootNodeId).perform();
+
+
 
         // TODO implement this
         return src;
