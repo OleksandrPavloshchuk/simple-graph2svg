@@ -1,8 +1,10 @@
 package temp.simplegraph2svg.svg;
 
 public class SvgElementsSizes {
-    public static int X_STEP = 360;
-    public static int Y_STEP = 180;
+    public static int X_STEP = 300;
+    public static int Y_STEP = 150;
 
-    static public int RADIUS = 20;
+    public static int RADIUS = 15;
+
+    public static int EDGE_OFFSET = 50;
 }

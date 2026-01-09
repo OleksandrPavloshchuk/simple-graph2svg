@@ -35,7 +35,7 @@ public record TranslateGraph(
         final Graph graph = new TranslateXml2GraphJavaObject().apply(src);
 
         // TODO pass start node id here
-        final String rootNodeId = "r";
+        final String rootNodeId = "0";
 
         final DistributeNodes distributeNodes = new DistributeNodes(graph, rootNodeId).perform();
         final Map<String, SvgPoint> coordinates = new TranslateGraph2SvgCoordinates()
@@ -53,7 +53,7 @@ public record TranslateGraph(
 
     private Optional<Document> buildDocumentFromInput() {
 
-        try (InputStream in = Files.newInputStream(Path.of("/home/oleksandr/personal/java/simple-graph2svg/samples/graph1.xml"))) {
+        try (InputStream in = Files.newInputStream(Path.of("/home/oleksandr/personal/java/simple-graph2svg/samples/graph2.xml"))) {
             return Optional.of(XmlUtils.getDocumentBuilder().parse(in));
         } catch (SAXException | IOException | ParserConfigurationException ex) {
             LOGGER.log(Level.SEVERE, "Can't read document", ex);

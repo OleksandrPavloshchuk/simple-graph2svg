@@ -43,7 +43,7 @@ public record TranslateGraph2Svg(
         final SvgShape targetShape = getShape(src.targetRef());
         final SvgPoint target = targetShape.intersectLineFrom(source);
 
-        final SvgEdge edge = new SvgEdge(source, target);
+        final SvgEdge edge = new SvgEdge(src.id(), src.color(), source, target);
         final Element edgeElem = edge.createElement(doc);
 
         return List.of(edgeElem);

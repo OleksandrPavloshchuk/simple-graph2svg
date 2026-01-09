@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <graph>
-    <node id="r" color="red" />
-    <node id="g" color="green" />
-    <node id="b" color="blue" />
+    <node id="r" color="#ff8080" />
+    <node id="g" color="#80ff80" />
+    <node id="b" color="#8080ff" />
     <edge id="r-g" color="yellow" sourceRef="r" targetRef="g" />
     <edge id="g-b" color="cyan" sourceRef="g" targetRef="b" />
     <edge id="b-g" color="magenta" sourceRef="b" targetRef="r" />
