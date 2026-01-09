@@ -22,19 +22,16 @@ public class DistributeNodes {
         this.graph = graph;
     }
 
-    public Map<String, Position> getPositions() {
-        return positions;
+    public DistributeNodes perform() {
+        Optional<String> idOpt;
+        while ((idOpt = getUnassignedNodeId()).isPresent()) {
+            visit(idOpt.get(), 0);
+        }
+        return this;
     }
 
-    public DistributeNodes perform() {
-        do {
-            final Optional<String> freeIdOpt = getUndistributedNodeId();
-            if (freeIdOpt.isEmpty()) {
-                return this;
-            }
-            final String freeId = freeIdOpt.get();
-            visit(freeId, 0);
-        } while (true);
+    public Map<String, Position> getPositions() {
+        return positions;
     }
 
     public int getMaxRow() {
@@ -45,31 +42,31 @@ public class DistributeNodes {
         return getMax(Position::col);
     }
 
-    private Optional<String> getUndistributedNodeId() {
+    private Optional<String> getUnassignedNodeId() {
         return graph.getNodeIds().stream()
-                .filter(id -> !positions.containsKey(id))
+                .filter(this::isUnassigned)
                 .findFirst();
     }
 
     private void visit(String id, int row) {
-        if (isVisited(id)) {
+        if (!isUnassigned(id)) {
             return;
         }
-        int col = maxColByRow.computeIfAbsent(row, k -> 0);
+        final int col = maxColByRow.computeIfAbsent(row, k -> 0);
         positions.put(id, new Position(row, col));
         maxColByRow.put(row, col + 1);
         graph.getLinkedNodeIds(id).forEach(linkedNodeId -> visit(linkedNodeId, row + 1));
     }
 
-    private boolean isVisited(String id) {
-        return positions.containsKey(id);
+    private boolean isUnassigned(String id) {
+        return !positions.containsKey(id);
     }
 
     private int getMax(Function<Position, Integer> getter) {
         return positions.values().stream()
                 .map(getter)
                 .max(Integer::compareTo)
-                .orElse(0);
+                .orElse(0); // empty graph → single virtual row/col
     }
 
     public record Position(int row, int col) {

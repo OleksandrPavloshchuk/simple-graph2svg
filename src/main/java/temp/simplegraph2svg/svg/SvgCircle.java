@@ -2,6 +2,7 @@ package temp.simplegraph2svg.svg;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import temp.simplegraph2svg.utils.SvgUtils;
 
 import static temp.simplegraph2svg.svg.SvgElementsSizes.RADIUS;
 
@@ -13,16 +14,9 @@ public record SvgCircle(
 
     @Override
     public SvgPoint intersectLineFrom(SvgPoint start) {
-        final double dx = center.x() - start.x();
-        final double dy = center.y() - start.y();
-
-        final double length = Math.sqrt(dx * dx + dy * dy);
-
-        final double cos = dx / length;
-        final double sin = dy / length;
-
+        final double cos = SvgUtils.cos(center, start);
+        final double sin = SvgUtils.sin(center, start);
         final double r = RADIUS + borderWidth / 2.0;
-
         return new SvgPoint(
                 center.x() - (int) (cos * r),
                 center.y() - (int) (sin * r)

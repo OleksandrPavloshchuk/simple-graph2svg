@@ -23,5 +23,8 @@
     <edge id="8-9" color="gray" sourceRef="8" targetRef="9" />
     <edge id="10-2" color="gray" sourceRef="10" targetRef="2" />
     <edge id="3-10" color="gray" sourceRef="3" targetRef="10" />
+    <edge id="2-3" color="gray" sourceRef="2" targetRef="3" />
+    <edge id="5-4" color="gray" sourceRef="5" targetRef="4" />
+    <edge id="3-8" color="gray" sourceRef="3" targetRef="8" />
 
 </graph>

@@ -2,6 +2,7 @@ package temp.simplegraph2svg.svg;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import temp.simplegraph2svg.utils.SvgUtils;
 
 import static temp.simplegraph2svg.svg.SvgElementsSizes.EDGE_OFFSET;
 
@@ -40,16 +41,10 @@ public record SvgEdge(
 
     private SvgPoint getCenterWithOffset() {
         final SvgPoint center = center();
-        final double dx = source.x() - target.x();
-        final double dy = source.y() - target.y();
-        final double length = Math.sqrt(dx * dx + dy * dy);
-
-        final double cos = dx / length;
-        final double sin = dy / length;
-
+        final double cos = SvgUtils.cos(source, target);
+        final double sin = SvgUtils.sin(source, target);
         final int ax = (int) (sin * EDGE_OFFSET);
         final int ay = (int) (cos * EDGE_OFFSET);
-
         return new SvgPoint(ax + center.x(), ay +  center.y());
     }
 

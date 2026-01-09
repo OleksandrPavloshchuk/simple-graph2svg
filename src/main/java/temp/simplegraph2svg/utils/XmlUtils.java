@@ -1,7 +1,6 @@
 package temp.simplegraph2svg.utils;
 
 import org.w3c.dom.Document;
-import temp.simplegraph2svg.translate.TranslateGraph;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
