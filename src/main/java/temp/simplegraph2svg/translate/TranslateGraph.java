@@ -2,6 +2,7 @@ package temp.simplegraph2svg.translate;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import temp.simplegraph2svg.graph.Graph;
 import temp.simplegraph2svg.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,6 +32,12 @@ public record TranslateGraph(
     }
 
     private Document perform(Document src) {
+
+        final Graph graph = new TranslateXml2GraphJavaObject().apply(src);
+
+        // TODO remove trace
+        System.out.println("Graph: " + graph);
+
         // TODO implement this
         return src;
     }
