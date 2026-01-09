@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+    <style type="text/css">text {font-family: Arial, sans serif; font-size: 8pt; text-anchor:middle; dominant-baseline:
+        middle;}
+    </style>
+    <defs>
+        <marker id="arrow" markerHeight="12" markerWidth="12" orient="auto-start-reverse" refX="20" refY="10"
+                viewBox="0 0 20 20">
+            <path d="M 0 0 L 20 10 L 0 20 Z" fill="gray"/>
+        </marker>
+    </defs>
+    <circle cx="540" cy="180" fill="red" r="20" stroke="red" stroke-width="1"/>
+    <text fill="black" x="540" y="180">r</text>
+    <circle cx="540" cy="540" fill="blue" r="20" stroke="blue" stroke-width="1"/>
+    <text fill="black" x="540" y="540">b</text>
+    <circle cx="540" cy="360" fill="green" r="20" stroke="green" stroke-width="1"/>
+    <text fill="black" x="540" y="360">g</text>
+    <line marker-end="url(#arrow)" stroke="gray" x1="540" x2="540" y1="200" y2="340"/>
+    <line marker-end="url(#arrow)" stroke="gray" x1="540" x2="540" y1="380" y2="520"/>
+    <line marker-end="url(#arrow)" stroke="gray" x1="540" x2="540" y1="520" y2="200"/>
+</svg>

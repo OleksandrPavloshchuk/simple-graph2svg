@@ -5,20 +5,30 @@ import org.w3c.dom.Element;
 import temp.simplegraph2svg.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public record SvgBaseDocumentBuilder(
         int maxCol,
         int maxRow
 ) {
+    private static final Logger LOGGER = Logger.getLogger(SvgBaseDocumentBuilder.class.getName());
+
     private static final String SVG_STYLE =
             "text {font-family: Arial, sans serif; font-size: 8pt; text-anchor:middle; dominant-baseline: middle;}";
 
-    public Document build() throws ParserConfigurationException {
-        final int width = (maxCol + 2) * SvgElementsSizes.X_STEP;
-        final int height = (maxRow + 2) * SvgElementsSizes.Y_STEP;
-        final Document doc = XmlUtils.getDocumentBuilder().newDocument();
-        doc.appendChild(createSvgElement(doc, width, height));
-        return doc;
+    public Optional<Document> build() {
+        try {
+            final int width = (maxCol + 2) * SvgElementsSizes.X_STEP;
+            final int height = (maxRow + 2) * SvgElementsSizes.Y_STEP;
+            final Document doc = XmlUtils.getDocumentBuilder().newDocument();
+            doc.appendChild(createSvgElement(doc, width, height));
+            return Optional.of(doc);
+        } catch( ParserConfigurationException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            return Optional.empty();
+        }
     }
 
     private static Element createSvgElement(Document doc, int width, int height) {

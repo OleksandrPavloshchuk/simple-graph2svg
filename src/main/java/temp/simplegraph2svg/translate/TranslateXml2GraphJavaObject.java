@@ -9,7 +9,9 @@ import temp.simplegraph2svg.graph.GraphNode;
 import temp.simplegraph2svg.graph.GraphObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class TranslateXml2GraphJavaObject
@@ -19,7 +21,7 @@ public class TranslateXml2GraphJavaObject
     public Graph apply(Document document) {
         final Element root = document.getDocumentElement();
         verify(root);
-        return new Graph(getObjects(root));
+        return new Graph(toMap(getObjects(root)));
     }
 
     private static void verify(Element root) {
@@ -37,6 +39,12 @@ public class TranslateXml2GraphJavaObject
             }
             node = node.getNextSibling();
         }
+        return result;
+    }
+
+    private static Map<String, GraphObject> toMap(List<GraphObject> list) {
+        final Map<String, GraphObject> result = new HashMap<>();
+        list.forEach(item -> result.put(item.id(), item));
         return result;
     }
 

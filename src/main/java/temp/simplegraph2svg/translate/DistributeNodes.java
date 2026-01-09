@@ -28,13 +28,11 @@ public class DistributeNodes {
     }
 
     public DistributeNodes perform() {
-        this.graph.findNodeById(this.startId).ifPresentOrElse(node -> {
-                    visit(this.startId, 0);
-                },
-                () -> {
-                    throw new IllegalArgumentException("Unexpected node id: " + this.startId);
-                }
-        );
+        if (this.graph.graphObjects().containsKey(startId)) {
+            visit(this.startId, 0);
+        } else {
+            throw new IllegalArgumentException("Unexpected node id: " + this.startId);
+        }
         return this;
     }
 

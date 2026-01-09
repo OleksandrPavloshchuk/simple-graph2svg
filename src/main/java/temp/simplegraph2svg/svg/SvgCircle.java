@@ -6,7 +6,9 @@ import org.w3c.dom.Element;
 import static temp.simplegraph2svg.svg.SvgElementsSizes.RADIUS;
 
 public record SvgCircle(
-        SvgPoint center, int borderWidth
+        SvgPoint center,
+        String color,
+        int borderWidth
 ) implements SvgShape {
 
     @Override
@@ -33,8 +35,8 @@ public record SvgCircle(
         result.setAttribute("cx", String.valueOf(center.x()));
         result.setAttribute("cy", String.valueOf(center.y()));
         result.setAttribute("r", String.valueOf(RADIUS));
-        result.setAttribute("stroke", "black");
-        result.setAttribute("fill", "white");
+        result.setAttribute("stroke", color);
+        result.setAttribute("fill", color);
         result.setAttribute( "stroke-width", String.valueOf(borderWidth));
         return result;
     }
