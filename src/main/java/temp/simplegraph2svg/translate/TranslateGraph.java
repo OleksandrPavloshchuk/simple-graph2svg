@@ -34,10 +34,7 @@ public record TranslateGraph(
 
         final Graph graph = new TranslateXml2GraphJavaObject().apply(src);
 
-        // TODO pass start node id here
-        final String rootNodeId = "0";
-
-        final DistributeNodes distributeNodes = new DistributeNodes(graph, rootNodeId).perform();
+        final DistributeNodes distributeNodes = new DistributeNodes(graph).perform();
         final Map<String, SvgPoint> coordinates = new TranslateGraph2SvgCoordinates()
                 .apply(distributeNodes.getPositions());
 

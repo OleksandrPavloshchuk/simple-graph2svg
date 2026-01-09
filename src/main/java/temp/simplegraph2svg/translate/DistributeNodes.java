@@ -4,6 +4,7 @@ import temp.simplegraph2svg.graph.Graph;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.function.Function;
 
@@ -12,15 +13,13 @@ import java.util.function.Function;
  */
 public class DistributeNodes {
     private final Graph graph;
-    private final String startId;
 
     private final Map<String, Position> positions = new TreeMap<>();
 
     private final Map<Integer, Integer> maxColByRow = new HashMap<>();
 
-    public DistributeNodes(Graph graph, String startId) {
+    public DistributeNodes(Graph graph) {
         this.graph = graph;
-        this.startId = startId;
     }
 
     public Map<String, Position> getPositions() {
@@ -28,12 +27,14 @@ public class DistributeNodes {
     }
 
     public DistributeNodes perform() {
-        if (this.graph.graphObjects().containsKey(startId)) {
-            visit(this.startId, 0);
-        } else {
-            throw new IllegalArgumentException("Unexpected node id: " + this.startId);
-        }
-        return this;
+        do {
+            final Optional<String> freeIdOpt = getUndistributedNodeId();
+            if (freeIdOpt.isEmpty()) {
+                return this;
+            }
+            final String freeId = freeIdOpt.get();
+            visit(freeId, 0);
+        } while (true);
     }
 
     public int getMaxRow() {
@@ -42,6 +43,12 @@ public class DistributeNodes {
 
     public int getMaxCol() {
         return getMax(Position::col);
+    }
+
+    private Optional<String> getUndistributedNodeId() {
+        return graph.getNodeIds().stream()
+                .filter(id -> !positions.containsKey(id))
+                .findFirst();
     }
 
     private void visit(String id, int row) {

@@ -8,6 +8,13 @@ public record Graph(
         Map<String, GraphObject> graphObjects
 ) {
 
+    public Set<String> getNodeIds() {
+        return graphObjects.values().stream()
+                .filter( obj -> obj.type()==GraphObjectType.NODE)
+                .map(GraphObject::id)
+                .collect(Collectors.toSet());
+    }
+
     public Set<String> getLinkedNodeIds(String id) {
         return graphObjects.values().stream()
                 .filter( obj -> obj.type()==GraphObjectType.EDGE)

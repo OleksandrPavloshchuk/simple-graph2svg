@@ -5,15 +5,23 @@
     <node id="1" color="gray" />
     <node id="2" color="gray" />
     <node id="3" color="gray" />
-    <node id="4" color="blue" />
+    <node id="4" color="lightgray" />
     <node id="5" color="blue" />
+    <node id="6" color="blue" />
+    <node id="7" color="yellow" />
+    <node id="8" color="green" />
+    <node id="9" color="lime" />
+    <node id="10" color="ivory" />
     <edge id="0-1" color="black" sourceRef="0" targetRef="1" />
     <edge id="0-2" color="black" sourceRef="0" targetRef="2" />
     <edge id="0-3" color="black" sourceRef="0" targetRef="3" />
-    <edge id="2-4" color="gray" sourceRef="2" targetRef="4" />
-    <edge id="4-1" color="gray" sourceRef="4" targetRef="1" />
-    <edge id="2-3" color="gray" sourceRef="2" targetRef="3" />
-    <edge id="4-3" color="black" sourceRef="4" targetRef="3" />
-    <edge id="3-5" color="black" sourceRef="3" targetRef="5" />
+    <edge id="0-4" color="gray" sourceRef="0" targetRef="4" />
+    <edge id="0-5" color="gray" sourceRef="0" targetRef="5" />
+    <edge id="7-4" color="gray" sourceRef="7" targetRef="4" />
+    <edge id="3-1" color="gray" sourceRef="3" targetRef="1" />
+    <edge id="5-8" color="gray" sourceRef="5" targetRef="8" />
+    <edge id="8-9" color="gray" sourceRef="8" targetRef="9" />
+    <edge id="10-2" color="gray" sourceRef="10" targetRef="2" />
+    <edge id="3-10" color="gray" sourceRef="3" targetRef="10" />
 
 </graph>
