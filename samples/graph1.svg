@@ -36,8 +36,10 @@
     <text fill="black" x="300" y="100">0</text>
     <circle cx="400" cy="200" fill="gray" r="15" stroke="gray" stroke-width="1"/>
     <text fill="black" x="400" y="200">1</text>
+    <circle cx="280" cy="420" fill="none" r="28.284271247461902" stroke="gray"/>
     <circle cx="600" cy="200" fill="gray" r="15" stroke="gray" stroke-width="1"/>
     <text fill="black" x="600" y="200">2</text>
+    <circle cx="260" cy="440" fill="none" r="56.568542494923804" stroke="gray"/>
     <circle cx="600" cy="300" fill="gray" r="15" stroke="gray" stroke-width="1"/>
     <text fill="black" x="600" y="300">3</text>
     <circle cx="200" cy="300" fill="lightgray" r="15" stroke="lightgray" stroke-width="1"/>

@@ -48,7 +48,9 @@ public record TranslateGraph2Svg(
         );
         final int index = findEdgeIndex(src.id(),sameSourceAndTargetEdges);
 
-        final SvgEdge edge = new SvgEdge(src.id(), src.color(), source, target, index);
+        final SvgObject edge = src.isSelf()
+                ? new SvgSelfEdge(src.id(), src.color(), source, index)
+                : new SvgEdge(src.id(), src.color(), source, target, index);
         final Element edgeElem = edge.createElement(doc);
 
         return List.of(edgeElem);
