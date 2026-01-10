@@ -20,8 +20,8 @@ public record SvgBaseDocumentBuilder(
 
     public Optional<Document> build() {
         try {
-            final int width = (maxCol + 2) * SvgElementsSizes.X_STEP;
-            final int height = (maxRow + 2) * SvgElementsSizes.Y_STEP;
+            final int width = (maxCol + 4) * SvgElementsSizes.X_STEP;
+            final int height = (maxRow + 4) * SvgElementsSizes.Y_STEP;
             final Document doc = XmlUtils.getDocumentBuilder().newDocument();
             doc.appendChild(createSvgElement(doc, width, height));
             return Optional.of(doc);
