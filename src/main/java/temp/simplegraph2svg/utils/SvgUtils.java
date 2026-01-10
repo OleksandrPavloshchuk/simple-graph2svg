@@ -6,6 +6,13 @@ public class SvgUtils {
 
     private SvgUtils() {}
 
+    public static SvgPoint middle(SvgPoint p1, SvgPoint p2) {
+        return new SvgPoint(
+                (p1.x() + p2.x()) / 2,
+                (p1.y() + p2.y()) / 2
+        );
+    }
+
     public static double length(SvgPoint p1, SvgPoint p2) {
         final double dx = p1.x() - p2.x();
         final double dy = p1.y() - p2.y();

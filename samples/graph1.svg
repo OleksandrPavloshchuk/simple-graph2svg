@@ -9,22 +9,22 @@
             <path d="M 0 0 L 20 10 L 0 20 Z" fill="gray"/>
         </marker>
     </defs>
-    <path d="M 690 390 Q 635 335, 510 210" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 390 110 Q 315 185, 310 190" fill="none" marker-end="url(#arrow)" stroke="black"/>
-    <path d="M 410 110 Q 415 115, 490 190" fill="none" marker-end="url(#arrow)" stroke="black"/>
-    <path d="M 410 110 Q 465 165, 590 290" fill="none" marker-end="url(#arrow)" stroke="black"/>
-    <path d="M 414 104 Q 534 103, 686 196" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 586 296 Q 466 297, 314 204" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 415 103 Q 641 101, 885 197" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 510 210 Q 515 215, 590 290" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 885 200 Q 800 250, 715 200" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 790 110 Q 715 185, 710 190" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 590 310 Q 515 385, 510 390" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 690 390 Q 528 372, 510 210" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 390 110 Q 382 182, 310 190" fill="none" marker-end="url(#arrow)" stroke="black"/>
+    <path d="M 410 110 Q 482 118, 490 190" fill="none" marker-end="url(#arrow)" stroke="black"/>
+    <path d="M 410 110 Q 572 128, 590 290" fill="none" marker-end="url(#arrow)" stroke="black"/>
+    <path d="M 414 104 Q 586 42, 686 196" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 586 296 Q 414 358, 314 204" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 415 103 Q 687 -38, 885 197" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 510 210 Q 582 218, 590 290" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 885 200 Q 800 268, 715 200" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 790 110 Q 782 182, 710 190" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 590 310 Q 582 382, 510 390" fill="none" marker-end="url(#arrow)" stroke="gray"/>
     <circle cx="700" cy="400" fill="ivory" r="15" stroke="ivory" stroke-width="1"/>
     <text fill="black" x="700" y="400">10</text>
-    <path d="M 887 206 Q 678 344, 513 394" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 510 410 Q 515 415, 590 490" fill="none" marker-end="url(#arrow)" stroke="gray"/>
-    <path d="M 610 310 Q 615 315, 690 390" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 887 206 Q 775 449, 513 394" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 510 410 Q 582 418, 590 490" fill="none" marker-end="url(#arrow)" stroke="gray"/>
+    <path d="M 610 310 Q 682 318, 690 390" fill="none" marker-end="url(#arrow)" stroke="gray"/>
     <circle cx="400" cy="100" fill="green" r="15" stroke="green" stroke-width="1"/>
     <text fill="black" x="400" y="100">0</text>
     <circle cx="300" cy="200" fill="gray" r="15" stroke="gray" stroke-width="1"/>

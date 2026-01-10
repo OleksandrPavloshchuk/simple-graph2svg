@@ -6,5 +6,5 @@ public class SvgElementsSizes {
 
     public static int RADIUS = 15;
 
-    public static int EDGE_OFFSET = 50;
+    public static double EDGE_OFFSET_RATIO = 0.4;
 }
