@@ -9,7 +9,8 @@ public record SvgEdge(
         String id,
         String color,
         SvgPoint source,
-        SvgPoint target
+        SvgPoint target,
+        int index
 ) implements SvgObject {
 
     @Override
@@ -19,7 +20,7 @@ public record SvgEdge(
 
     @Override
     public Element createElement(Document doc) {
-        final Element result = new ArcEdgeFactory().create(doc, source, target);
+        final Element result = new ArcEdgeFactory().create(doc, source, target, index);
         result.setAttribute("stroke", color);
         result.setAttribute("marker-end", "url(#arrow)");
         return result;

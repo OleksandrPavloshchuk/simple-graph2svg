@@ -43,7 +43,12 @@ public record TranslateGraph2Svg(
         final SvgShape targetShape = getShape(src.targetRef());
         final SvgPoint target = targetShape.intersectLineFrom(source);
 
-        final SvgEdge edge = new SvgEdge(src.id(), src.color(), source, target);
+        final List<GraphEdge> sameSourceAndTargetEdges = this.graph.getEdges(
+                src.sourceRef(), src.targetRef()
+        );
+        final int index = findEdgeIndex(src.id(),sameSourceAndTargetEdges);
+
+        final SvgEdge edge = new SvgEdge(src.id(), src.color(), source, target, index);
         final Element edgeElem = edge.createElement(doc);
 
         return List.of(edgeElem);
@@ -78,6 +83,15 @@ public record TranslateGraph2Svg(
             case GraphObjectType.EDGE -> throw new IllegalArgumentException("Unexpected type: " + graphObject.type());
             case GraphObjectType.NODE -> coordinates.get(graphObject.id());
         };
+    }
+
+    private static int findEdgeIndex(String edgeId, List<GraphEdge> edges) {
+        for (int i = 0; i < edges.size(); i++) {
+            if (edges.get(i).id().equals(edgeId)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

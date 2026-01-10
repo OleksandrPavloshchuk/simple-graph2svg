@@ -17,10 +17,13 @@
     <edge id="0-3" color="black" sourceRef="0" targetRef="3" />
     <edge id="0-4" color="gray" sourceRef="0" targetRef="4" />
     <edge id="0-5" color="gray" sourceRef="0" targetRef="5" />
+    <edge id="0-5-1" color="gray" sourceRef="0" targetRef="5" />
+    <edge id="0-5-2" color="gray" sourceRef="0" targetRef="5" />
     <edge id="7-4" color="gray" sourceRef="7" targetRef="4" />
     <edge id="3-1" color="gray" sourceRef="3" targetRef="1" />
     <edge id="5-8" color="gray" sourceRef="5" targetRef="8" />
     <edge id="8-9" color="gray" sourceRef="8" targetRef="9" />
+    <edge id="8-9-1" color="green" sourceRef="8" targetRef="9" />
     <edge id="10-2" color="gray" sourceRef="10" targetRef="2" />
     <edge id="3-10" color="gray" sourceRef="3" targetRef="10" />
     <edge id="2-3" color="gray" sourceRef="2" targetRef="3" />
