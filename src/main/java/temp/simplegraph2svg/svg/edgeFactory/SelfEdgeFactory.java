@@ -16,13 +16,14 @@ public class SelfEdgeFactory implements EdgeFactory {
     public Element create(Document doc, SvgPoint p1, SvgPoint p2, int index) {
         final Element result = doc.createElement("circle");
         result.setAttribute("fill", "none");
+        final int k = index + 1;
         final SvgPoint center = new SvgPoint(
-                p1.x() - SELF_EDGE_BASE_OFFSET * (index+1),
-                p1.y() + SELF_EDGE_BASE_OFFSET * (index+1)
+                p1.x() - SELF_EDGE_BASE_OFFSET * k,
+                p1.y() + SELF_EDGE_BASE_OFFSET * k
         );
         result.setAttribute("cx", String.valueOf(center.x()));
         result.setAttribute("cy", String.valueOf(center.y()));
-        result.setAttribute("r", String.valueOf(RADIUS_FACTOR * SELF_EDGE_BASE_OFFSET * (index+1)));
+        result.setAttribute("r", String.valueOf(RADIUS_FACTOR * SELF_EDGE_BASE_OFFSET * k));
         return result;
     }
 

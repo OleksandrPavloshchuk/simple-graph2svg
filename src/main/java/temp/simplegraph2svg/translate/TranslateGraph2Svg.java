@@ -7,7 +7,6 @@ import temp.simplegraph2svg.svg.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public record TranslateGraph2Svg(
         Document doc,
@@ -16,15 +15,17 @@ public record TranslateGraph2Svg(
 
     public void convert() {
         final Element root = doc.getDocumentElement();
-        final Set<String> ids = graph.graphObjects().keySet();
-        ids.forEach(id -> {
-            final List<Element> elements = convert(getGraphObject(id));
-            elements.forEach(root::appendChild);
-        });
+        graph.graphObjects().keySet().forEach(id ->
+                convert(getGraphObject(id)).forEach(root::appendChild)
+        );
     }
 
     private GraphObject getGraphObject(String id) {
         return graph.graphObjects().get(id);
+    }
+
+    private GraphNode getGraphNode(String id) {
+        return (GraphNode) getGraphObject(id);
     }
 
     private List<Element> convert(GraphObject graphObject) {
@@ -35,7 +36,7 @@ public record TranslateGraph2Svg(
     }
 
     private List<Element> convert(GraphEdge src) {
-        final SvgPoint targetCenter = getCenter(getGraphObject(src.targetRef()));
+        final SvgPoint targetCenter = getCenter(getGraphNode(src.targetRef()));
 
         final SvgCircle sourceShape = getShape(src.sourceRef());
         final SvgPoint source = sourceShape.intersectLineFrom(targetCenter);
@@ -46,7 +47,7 @@ public record TranslateGraph2Svg(
         final List<GraphEdge> sameSourceAndTargetEdges = this.graph.getEdges(
                 src.sourceRef(), src.targetRef()
         );
-        final int index = findEdgeIndex(src.id(),sameSourceAndTargetEdges);
+        final int index = findEdgeIndex(src.id(), sameSourceAndTargetEdges);
 
         final SvgObject edge = src.isSelf()
                 ? new SvgSelfEdge(src.id(), src.color(), source, index)
@@ -57,9 +58,8 @@ public record TranslateGraph2Svg(
     }
 
     private SvgCircle getShape(String id) {
-        final GraphObject graphObject = getGraphObject(id);
-        final SvgPoint center = getCenter(graphObject);
-        return new SvgCircle(center, graphObject.color(), 1);
+        final GraphNode graphNode = getGraphNode(id);
+        return new SvgCircle(getCenter(graphNode), graphNode.color(), 1);
     }
 
     private List<Element> convert(GraphNode graphNode) {
@@ -69,22 +69,19 @@ public record TranslateGraph2Svg(
         );
     }
 
-    private Element convertToCircle(GraphObject graphObject) {
+    private Element convertToCircle(GraphNode graphNode) {
         return new SvgCircle(
-                getCenter(graphObject),
-                graphObject.color(),
+                getCenter(graphNode),
+                graphNode.color(),
                 1).createElement(doc);
     }
 
-    private Element convertToText(GraphObject graphObject) {
-        return new SvgText(getCenter(graphObject), graphObject.id()).createElement(doc);
+    private Element convertToText(GraphNode graphNode) {
+        return new SvgText(getCenter(graphNode), graphNode.id()).createElement(doc);
     }
 
-    private SvgPoint getCenter(GraphObject graphObject) {
-        return switch (graphObject.type()) {
-            case GraphObjectType.EDGE -> throw new IllegalArgumentException("Unexpected type: " + graphObject.type());
-            case GraphObjectType.NODE -> coordinates.get(graphObject.id());
-        };
+    private SvgPoint getCenter(GraphNode graphObject) {
+        return coordinates.get(graphObject.id());
     }
 
     private static int findEdgeIndex(String edgeId, List<GraphEdge> edges) {

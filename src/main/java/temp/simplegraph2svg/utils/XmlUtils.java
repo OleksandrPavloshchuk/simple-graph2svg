@@ -5,7 +5,6 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -17,7 +16,8 @@ import java.util.logging.Logger;
 public class XmlUtils {
     private static final Logger LOGGER = Logger.getLogger(XmlUtils.class.getName());
 
-    private XmlUtils() {}
+    private XmlUtils() {
+    }
 
     public static DocumentBuilder getDocumentBuilder() throws ParserConfigurationException {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -27,11 +27,9 @@ public class XmlUtils {
 
     public static void writeDocumentToOutput(Document src, OutputStream output) {
         try {
-            final DOMSource domSource = new DOMSource(src);
-            final StreamResult streamResult = new StreamResult(output);
-            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            final Transformer transformer = transformerFactory.newTransformer();
-            transformer.transform(domSource, streamResult);
+            TransformerFactory.newInstance()
+                    .newTransformer()
+                    .transform(new DOMSource(src), new StreamResult(output));
         } catch (TransformerException ex) {
             LOGGER.log(Level.SEVERE, "Writing error", ex);
         }
