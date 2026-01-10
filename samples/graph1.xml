@@ -4,7 +4,11 @@
     <node id="r" color="#ff8080" />
     <node id="g" color="#80ff80" />
     <node id="b" color="#8080ff" />
+    <node id="X" color="#cccccc" />
     <edge id="r-g" color="yellow" sourceRef="r" targetRef="g" />
     <edge id="g-b" color="cyan" sourceRef="g" targetRef="b" />
     <edge id="b-g" color="magenta" sourceRef="b" targetRef="r" />
+    <edge id="X-r" color="grey" sourceRef="X" targetRef="g" />
+    <edge id="X-b" color="grey" sourceRef="X" targetRef="b" />
+    <edge id="X-g" color="grey" sourceRef="X" targetRef="r" />
 </graph>

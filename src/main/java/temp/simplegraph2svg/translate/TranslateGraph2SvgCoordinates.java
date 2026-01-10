@@ -20,7 +20,7 @@ public class TranslateGraph2SvgCoordinates
     private static SvgPoint getSvgPoint(Map<String, DistributeNodes.Position> src, DistributeNodes.Position position) {
         final int colsCount = getColsCount(position.row(), src);
         final double offset = ((double) colsCount) / 2;
-        final double x = (position.col() + 3 - offset) * SvgElementsSizes.X_STEP;
+        final double x = (position.col() + 2 - offset) * SvgElementsSizes.X_STEP;
         return new SvgPoint(
                 (int) x,
                 (1 + position.row()) * SvgElementsSizes.Y_STEP);
