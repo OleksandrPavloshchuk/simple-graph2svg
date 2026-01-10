@@ -11,4 +11,8 @@ public record GraphEdge(
     public GraphObjectType type() {
         return GraphObjectType.EDGE;
     }
+
+    public boolean isSelf() {
+        return sourceRef.equals(targetRef);
+    }
 }

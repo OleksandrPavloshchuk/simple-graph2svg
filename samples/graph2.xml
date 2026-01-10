@@ -12,6 +12,7 @@
     <node id="8" color="green" />
     <node id="9" color="lime" />
     <node id="10" color="ivory" />
+    <node id="11" color="slategray" />
     <edge id="0-1" color="black" sourceRef="0" targetRef="1" />
     <edge id="0-2" color="black" sourceRef="0" targetRef="2" />
     <edge id="0-3" color="black" sourceRef="0" targetRef="3" />
@@ -29,5 +30,9 @@
     <edge id="2-3" color="gray" sourceRef="2" targetRef="3" />
     <edge id="5-4" color="gray" sourceRef="5" targetRef="4" />
     <edge id="3-8" color="gray" sourceRef="3" targetRef="8" />
+    <edge id="9-8" color="gray" sourceRef="9" targetRef="8" />
+    <edge id="5-11" color="gray" sourceRef="5" targetRef="11" />
+    <edge id="9-9-1" color="gray" sourceRef="9" targetRef="9" />
+    <edge id="9-9-2" color="gray" sourceRef="9" targetRef="9" />
 
 </graph>
