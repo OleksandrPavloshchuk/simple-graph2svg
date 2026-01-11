@@ -45,9 +45,8 @@ This project follows the Unix philosophy:
 
 ```bash
 
-camunda-validate process.bpmn \
-  && java -jar bpmn2svg.jar < process.bpmn > process.svg \
-  && xdg-open process.svg
+java -jar simple-graph2svg.jar < graphph.xml > graph.svg \
+  && xdg-open graph.svg
 ```
 
 ## When NOT to use this tool
