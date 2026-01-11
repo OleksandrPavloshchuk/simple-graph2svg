@@ -9,20 +9,23 @@ import io.netty.handler.codec.http.HttpServerCodec;
 public class HttpServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     private final LoggingHandler loggingHandler;
-    private final StringWriter stringWriter;
-    private final StringReader stringReader;
+    final HttpMethodDispatcher httpMethodDispatcher;
+    private final ResponseWriter responseWriter;
     private final Graph2SvgTransformer graph2SvgTransformer;
+    private final StaticHtmlRetriever staticHtmlRetriever;
 
     public HttpServerChannelInitializer(
             LoggingHandler loggingHandler,
-            StringReader stringReader,
+            HttpMethodDispatcher httpMethodDispatcher,
             Graph2SvgTransformer graph2SvgTransformer,
-            StringWriter stringWriter
+            StaticHtmlRetriever staticHtmlRetriever,
+            ResponseWriter responseWriter
     ) {
         this.loggingHandler = loggingHandler;
-        this.stringReader = stringReader;
-        this.stringWriter = stringWriter;
+        this.httpMethodDispatcher = httpMethodDispatcher;
+        this.responseWriter = responseWriter;
         this.graph2SvgTransformer = graph2SvgTransformer;
+        this.staticHtmlRetriever = staticHtmlRetriever;
     }
 
     @Override
@@ -31,9 +34,10 @@ public class HttpServerChannelInitializer extends ChannelInitializer<SocketChann
         pipeline.addLast("httpServerCodec", new HttpServerCodec());
         pipeline.addLast("httpObjectAggregator", new HttpObjectAggregator(65536));
         pipeline.addLast("loggingHandler", loggingHandler);
-        pipeline.addLast("stringReader", stringReader);
+        pipeline.addLast("httpMethodDispatcher", httpMethodDispatcher);
         pipeline.addLast("transformer", graph2SvgTransformer);
-        pipeline.addLast("stringWriter", stringWriter);
+        pipeline.addLast("htmlRetriever", staticHtmlRetriever);
+        pipeline.addLast("stringWriter", responseWriter);
         pipeline.addLast("end", new LastInChainHandler());
     }
 }

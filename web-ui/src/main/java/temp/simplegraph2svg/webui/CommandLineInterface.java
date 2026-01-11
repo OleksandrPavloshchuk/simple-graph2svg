@@ -8,15 +8,17 @@ public class CommandLineInterface {
     public static void main(String[] args) {
         // Dependency injection:
         final LoggingHandler loggingHandler = new LoggingHandler();
-        final StringReader stringReader = new StringReader();
+        final HttpMethodDispatcher httpMethodDispatcher = new HttpMethodDispatcher();
         final Graph2SvgTransformer graph2SvgTransformer = new Graph2SvgTransformer();
-        final StringWriter stringWriter = new StringWriter();
+        final StaticHtmlRetriever staticHtmlRetriever = new StaticHtmlRetriever();
+        final ResponseWriter responseWriter = new ResponseWriter();
 
         final HttpServerChannelInitializer httpServerChannelInitializer = new HttpServerChannelInitializer(
                 loggingHandler,
-                stringReader,
+                httpMethodDispatcher,
                 graph2SvgTransformer,
-                stringWriter
+                staticHtmlRetriever,
+                responseWriter
         );
 
         new HttpServer(

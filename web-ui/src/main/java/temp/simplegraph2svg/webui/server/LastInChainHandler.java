@@ -5,6 +5,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
@@ -18,11 +19,7 @@ public class LastInChainHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
         LOG.error(cause.getMessage(), cause);
-        HttpResponseStatus responseStatus;
-        switch (cause) {
-            case IllegalArgumentException ignored -> responseStatus = HttpResponseStatus.BAD_REQUEST;
-            default -> responseStatus = HttpResponseStatus.INTERNAL_SERVER_ERROR;
-        }
+        final HttpResponseStatus responseStatus = getResponseStatus(cause);
         final FullHttpResponse response = new DefaultFullHttpResponse(
                 HttpVersion.HTTP_1_1,
                 responseStatus,
@@ -30,4 +27,20 @@ public class LastInChainHandler extends ChannelInboundHandlerAdapter {
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }
+
+    private HttpResponseStatus getResponseStatus(final Throwable rootCause) {
+        return switch (rootCause) {
+            case DecoderException ex -> getResponseStatus(ex);
+            default -> HttpResponseStatus.INTERNAL_SERVER_ERROR;
+        };
+    }
+
+    private HttpResponseStatus getResponseStatus(final DecoderException cause) {
+        return switch (cause.getCause()) {
+            case ResourceNotFoundException ignored -> HttpResponseStatus.NOT_FOUND;
+            case IllegalArgumentException ignored -> HttpResponseStatus.BAD_REQUEST;
+            default -> HttpResponseStatus.INTERNAL_SERVER_ERROR;
+        };
+    }
+
 }

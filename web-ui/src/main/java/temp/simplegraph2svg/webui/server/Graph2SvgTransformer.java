@@ -11,16 +11,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @ChannelHandler.Sharable
-public class Graph2SvgTransformer extends MessageToMessageDecoder<String> {
+public class Graph2SvgTransformer extends MessageToMessageDecoder<PostRequest> {
 
     @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, String src, List<Object> out) {
-        final ByteArrayInputStream inputStream = new ByteArrayInputStream(src.getBytes(StandardCharsets.UTF_8));
+    protected void decode(ChannelHandlerContext channelHandlerContext, PostRequest src, List<Object> out) {
+        final ByteArrayInputStream inputStream = new ByteArrayInputStream(src.body().getBytes(StandardCharsets.UTF_8));
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         new TranslateGraph(inputStream, outputStream).perform();
 
-        out.add(outputStream.toString(StandardCharsets.UTF_8));
+        out.add(new Response(
+                "image/svg+xml;charset=utf-8",
+                outputStream.toString(StandardCharsets.UTF_8)
+        ));
     }
 
 }

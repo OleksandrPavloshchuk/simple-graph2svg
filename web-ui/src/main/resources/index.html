@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>simple-graph2svg web console</title>
+</head>
+<body>
+<h1>simple-graph2svg web console</h1>
+
+<label for="input">Graph:</label>
+<textarea id="input" cols="40" rows="5">
+</textarea>
+<button onclick="testContentOnServer()">Test</button>
+<hr/>
+<img id="result" />
+</body>
+<script type="text/javascript">
+    const testContentOnServer = () => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "text/xml" },
+            body: document.getElementById("input").value
+        })
+            .then(r => r.text())
+            .then(svg => {
+                document.getElementById("result").src =
+                    "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+            });
+    }
+</script>
+</html>
