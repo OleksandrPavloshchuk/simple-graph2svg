@@ -1,6 +1,7 @@
 package temp.simplegraph2svg.webui.server;
 
 import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -9,6 +10,7 @@ import io.netty.util.CharsetUtil;
 
 import java.util.logging.Level;
 
+@ChannelHandler.Sharable
 public class LoggingHandler extends ChannelDuplexHandler {
     private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(LoggingHandler.class.getName());
 

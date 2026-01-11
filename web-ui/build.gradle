@@ -25,6 +25,10 @@ jar {
 	}
 }
 
+tasks.named('jar') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 dependencies {
     implementation project (":kernel")
     implementation 'io.netty:netty-transport:4.1.115.Final'

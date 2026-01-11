@@ -11,15 +11,18 @@ public class HttpServerChannelInitializer extends ChannelInitializer<SocketChann
     private final LoggingHandler loggingHandler;
     private final StringWriter stringWriter;
     private final StringReader stringReader;
+    private final Graph2SvgTransformer graph2SvgTransformer;
 
     public HttpServerChannelInitializer(
             LoggingHandler loggingHandler,
             StringReader stringReader,
+            Graph2SvgTransformer graph2SvgTransformer,
             StringWriter stringWriter
     ) {
         this.loggingHandler = loggingHandler;
         this.stringReader = stringReader;
         this.stringWriter = stringWriter;
+        this.graph2SvgTransformer = graph2SvgTransformer;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class HttpServerChannelInitializer extends ChannelInitializer<SocketChann
         pipeline.addLast("httpObjectAggregator", new HttpObjectAggregator(65536));
         pipeline.addLast("loggingHandler", loggingHandler);
         pipeline.addLast("stringReader", stringReader);
-        // TODO insert transformer
+        pipeline.addLast("transformer", graph2SvgTransformer);
         pipeline.addLast("stringWriter", stringWriter);
         pipeline.addLast("end", new LastInChainHandler());
     }
