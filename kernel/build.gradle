@@ -1,0 +1,47 @@
+plugins {
+	id "java"
+	id "application"
+    id 'jacoco'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+jar {
+    archiveBaseName = "simple-graph2svg-kernel"
+    archiveVersion = "0.0.1"
+
+	manifest {
+		attributes(
+				"Main-Class" : "temp.bpmn2svg.CommandLineInterface"
+		)
+	}
+	from {
+		configurations.runtimeClasspath.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.9.0'
+}
+
+test {
+    useTestNG()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
