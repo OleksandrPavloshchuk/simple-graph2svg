@@ -10,9 +10,12 @@ repositories {
 }
 
 jar {
+    archiveBaseName = "simple-graph2svg-web-ui"
+    archiveVersion = "0.0.1"
+
 	manifest {
 		attributes(
-				"Main-Class" : "temp.bpmn2svg.CommandLineInterface"
+				"Main-Class" : "temp.bpmn2svg.webui.CommandLineInterface"
 		)
 	}
 	from {
@@ -23,6 +26,7 @@ jar {
 }
 
 dependencies {
+    implementation project (":kernel")
     testImplementation 'org.testng:testng:7.9.0'
 }
 

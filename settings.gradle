@@ -1,3 +1,4 @@
 rootProject.name = 'simple-graph2svg'
 
 include 'kernel'
+include 'web-ui'
