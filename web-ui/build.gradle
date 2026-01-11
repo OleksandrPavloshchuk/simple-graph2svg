@@ -27,6 +27,11 @@ jar {
 
 dependencies {
     implementation project (":kernel")
+    implementation 'io.netty:netty-transport:4.1.115.Final'
+    implementation 'io.netty:netty-handler:4.1.115.Final'
+    implementation 'io.netty:netty-codec-http:4.1.115.Final'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.16'
     testImplementation 'org.testng:testng:7.9.0'
 }
 
