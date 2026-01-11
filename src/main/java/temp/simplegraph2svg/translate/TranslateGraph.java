@@ -11,8 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -49,15 +47,12 @@ public record TranslateGraph(
     }
 
     private Optional<Document> buildDocumentFromInput() {
-
-        try (InputStream in = Files.newInputStream(Path.of("/home/oleksandr/personal/java/simple-graph2svg/samples/graph2.xml"))) {
-            return Optional.of(XmlUtils.getDocumentBuilder().parse(in));
+        try {
+            return Optional.of(XmlUtils.getDocumentBuilder().parse(inputStream));
         } catch (SAXException | IOException | ParserConfigurationException ex) {
             LOGGER.log(Level.SEVERE, "Can't read document", ex);
             return Optional.empty();
         }
-        // TODO restore it for CLI
-        //return getDocumentBuilder().parse(input);
     }
 
 
