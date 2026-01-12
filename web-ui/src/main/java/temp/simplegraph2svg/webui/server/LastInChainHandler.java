@@ -10,6 +10,7 @@ import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import temp.simplegraph2svg.translate.GraphTranslationException;
 
 @ChannelHandler.Sharable
 public class LastInChainHandler extends ChannelInboundHandlerAdapter {
@@ -39,6 +40,7 @@ public class LastInChainHandler extends ChannelInboundHandlerAdapter {
         return switch (cause.getCause()) {
             case ResourceNotFoundException ignored -> HttpResponseStatus.NOT_FOUND;
             case IllegalArgumentException ignored -> HttpResponseStatus.BAD_REQUEST;
+            case GraphTranslationException ignored -> HttpResponseStatus.BAD_REQUEST;
             default -> HttpResponseStatus.INTERNAL_SERVER_ERROR;
         };
     }

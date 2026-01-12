@@ -12,6 +12,7 @@
 </textarea>
 <button onclick="testContentOnServer()">Test</button>
 <hr/>
+<div id="error" style="display: none"></div>
 <img id="result" />
 </body>
 <script type="text/javascript">
@@ -21,10 +22,24 @@
             headers: { "Content-Type": "text/xml" },
             body: document.getElementById("input").value
         })
-            .then(r => r.text())
+            .then(r => {
+                if (!r.ok) {
+                    return r.text().then(msg => {
+                        throw new Error(msg || `HTTP error ${r.status}`);
+                    });
+                }
+                return r.text(); // успішна відповідь → SVG
+            })
             .then(svg => {
+                document.getElementById("error").setAttribute("style", "display: none");
                 document.getElementById("result").src =
                     "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+            })
+            .catch(e => {
+                let elem = document.getElementById("error");
+                elem.setAttribute("style", "display: inline; color: maroon");
+                elem.textContent = '';
+                elem.appendChild(document.createTextNode(e.message));
             });
     }
 </script>

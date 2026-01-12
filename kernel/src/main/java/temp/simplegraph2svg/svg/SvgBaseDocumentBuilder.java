@@ -2,6 +2,7 @@ package temp.simplegraph2svg.svg;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import temp.simplegraph2svg.translate.GraphTranslationException;
 import temp.simplegraph2svg.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,7 +19,7 @@ public record SvgBaseDocumentBuilder(
     private static final String SVG_STYLE =
             "text {font-family: Arial, sans serif; font-size: 8pt; text-anchor:middle; dominant-baseline: middle;}";
 
-    public Optional<Document> build() {
+    public Optional<Document> build() throws GraphTranslationException {
         try {
             final int width = (maxCol + 4) * SvgElementsSizes.X_STEP;
             final int height = (maxRow + 4) * SvgElementsSizes.Y_STEP;
@@ -27,7 +28,7 @@ public record SvgBaseDocumentBuilder(
             return Optional.of(doc);
         } catch( ParserConfigurationException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            return Optional.empty();
+            throw new GraphTranslationException(ex);
         }
     }
 

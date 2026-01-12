@@ -22,7 +22,7 @@ public record TranslateGraph(
 ) {
     private static final Logger LOGGER = Logger.getLogger(TranslateGraph.class.getName());
 
-    public void perform() {
+    public void perform() throws GraphTranslationException {
         buildDocumentFromInput()
                 .flatMap(this::perform)
                 .ifPresent(dest -> XmlUtils.writeDocumentToOutput(dest, outputStream));
@@ -36,14 +36,11 @@ public record TranslateGraph(
         final Map<String, SvgPoint> coordinates = new TranslateGraph2SvgCoordinates()
                 .apply(distributeNodes.getPositions());
 
-        final Optional<Document> destOpt = new SvgBaseDocumentBuilder(
-                distributeNodes.getMaxCol(), distributeNodes.getMaxRow()).build();
-        if (destOpt.isPresent()) {
-            new TranslateGraph2Svg(destOpt.get(), coordinates, graph).convert();
-            return destOpt;
-        } else {
-            return Optional.empty();
-        }
+        return new SvgBaseDocumentBuilder(distributeNodes.getMaxCol(), distributeNodes.getMaxRow())
+                .build()
+                .stream()
+                .peek(svgDoc -> new TranslateGraph2Svg(svgDoc, coordinates, graph).convert())
+                .findFirst();
     }
 
     private Optional<Document> buildDocumentFromInput() {
@@ -51,9 +48,8 @@ public record TranslateGraph(
             return Optional.of(XmlUtils.getDocumentBuilder().parse(inputStream));
         } catch (SAXException | IOException | ParserConfigurationException ex) {
             LOGGER.log(Level.SEVERE, "Can't read document", ex);
-            return Optional.empty();
+            throw new GraphTranslationException(ex);
         }
     }
-
 
 }
