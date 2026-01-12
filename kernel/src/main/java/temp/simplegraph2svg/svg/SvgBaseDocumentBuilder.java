@@ -49,11 +49,11 @@ public record SvgBaseDocumentBuilder(
     private static Element createMarkerElement(Document doc) {
         final Element elemMarker = doc.createElement("marker");
         elemMarker.setAttribute("id", "arrow");
-        elemMarker.setAttribute("viewBox", "0 0 20 20");
-        elemMarker.setAttribute("refX", "20");
-        elemMarker.setAttribute("refY", "10");
-        elemMarker.setAttribute("markerWidth", "12");
-        elemMarker.setAttribute("markerHeight","12");
+        elemMarker.setAttribute("viewBox", "0 0 10 10");
+        elemMarker.setAttribute("refX", "10");
+        elemMarker.setAttribute("refY", "5");
+        elemMarker.setAttribute("markerWidth", "6");
+        elemMarker.setAttribute("markerHeight","6");
         elemMarker.setAttribute("orient","auto-start-reverse");
         elemMarker.appendChild(createPathElem(doc));
         return elemMarker;
@@ -62,7 +62,7 @@ public record SvgBaseDocumentBuilder(
     private static Element createPathElem(Document doc) {
         final Element result = doc.createElement("path");
         result.setAttribute("fill", "gray");
-        result.setAttribute("d", "M 0 0 L 20 10 L 0 20 Z");
+        result.setAttribute("d", "M 0 0 L 10 5 L 0 10 Z");
         return result;
     }
 
