@@ -71,7 +71,7 @@ Breaking changes will be avoided unless strictly necessary.
 
 This project intentionally prefers composability over feature completeness.
 
-# Web client
+## Web client
 Web client is located in directory **/web-ui**. It starts the simple web server on port 8080 (based on Netty).
 
 * Server start: `java -jar simple-graph2svg0web-ui-0.0.1jar`.
