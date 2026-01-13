@@ -12,7 +12,7 @@ import io.netty.util.CharsetUtil;
 public class ResponseWriter extends SimpleChannelInboundHandler<Response> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Response response) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Response response) {
 
         final FullHttpResponse httpResponse = new DefaultFullHttpResponse(
                 HttpVersion.HTTP_1_1,

@@ -37,10 +37,15 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.16'
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.16'
     testImplementation 'org.testng:testng:7.9.0'
+    testImplementation 'org.mockito:mockito-all:1.9.0'
 }
 
 test {
     useTestNG()
+    jvmArgs(
+            "--add-opens=java.base/java.lang=ALL-UNNAMED",
+            "--add-opens=java.base/java.nio=ALL-UNNAMED"
+    )
     testLogging {
         events "passed", "skipped", "failed"
     }

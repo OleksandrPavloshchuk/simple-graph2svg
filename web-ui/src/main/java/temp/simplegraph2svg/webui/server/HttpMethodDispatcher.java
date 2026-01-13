@@ -15,7 +15,7 @@ import java.util.List;
 public class HttpMethodDispatcher extends MessageToMessageDecoder<FullHttpRequest> {
 
     @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, FullHttpRequest request, List<Object> out) throws ParserConfigurationException, IOException, SAXException {
+    protected void decode(ChannelHandlerContext channelHandlerContext, FullHttpRequest request, List<Object> out) {
         out.add(toTypedRequest(request));
     }
 
@@ -23,7 +23,7 @@ public class HttpMethodDispatcher extends MessageToMessageDecoder<FullHttpReques
         return switch (request.method().name().toUpperCase()) {
             case "POST" -> new PostRequest(request.content().toString(CharsetUtil.UTF_8));
             case "GET" -> new GetRequest();
-            default -> throw new RuntimeException("Unexpected method: " + request.method().name());
+            default -> throw new IllegalArgumentException("Unexpected method: " + request.method().name());
         };
     }
 
