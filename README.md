@@ -12,7 +12,7 @@ This tool deliberately does **not**:
 - validate input content beyond basic structural sanity checks
 - perform automatic layout or routing
 - provide a graphical user interface
-- 
+
 ### Input file sample
 
 ```xml
@@ -51,8 +51,7 @@ java -jar simple-graph2svg.jar < graphph.xml > graph.svg \
 
 ## When NOT to use this tool
 - 
-- Input XML is syntactically and semantically valid
-- There are not any isolated subgraphs and self-cycling
+- Input XML is not syntactically and semantically valid
 
 ## Feature requests
 
